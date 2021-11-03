@@ -7,6 +7,7 @@
 ;;; Code:
 (require 'core/keys)
 
+(require 'evil-collection)
 (require 'general)
 (require 'recentf)
 (require 'use-package)
@@ -170,7 +171,10 @@ instead of `universal-argument'."
   "u" '(better-universal-argument :wk "universal"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Evil Motions
+;; Evil
+
+(evil-collection-dired-setup)
+(evil-collection-compile-setup)
 
 (global-motion-definer
   "s" #'sort-lines
