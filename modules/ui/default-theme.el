@@ -61,12 +61,6 @@ aligned respectively."
     " %b "
     mode-name
     " "
-    ;; TODO Propertize this nicely.
-    (:eval (concat "[" (tab-bar-current-tab-name) "]"))
-
-    ;; Mode Specific Stuff
-    (:eval (format-mode-line mode-line-mode-info))
-
     ;; Org
     org-pomodoro-mode-line
     ;; TODO I don't love the look of this... Perhaps we could insert it somewhere else?
