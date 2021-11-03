@@ -13,6 +13,7 @@
   :straight t
   :mode "\\.hs\\'"
   :init
+  (add-to-path "~/.ghcup/bin/")
   (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
   (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
   (when (featurep 'editor/lsp)
