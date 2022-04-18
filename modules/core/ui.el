@@ -50,5 +50,8 @@
 ;; https://emacs.stackexchange.com/questions/28736/emacs-pointcursor-movement-lag/28746
 (setq auto-window-vscroll nil)
 
+(show-paren-mode 1)
+(global-display-line-numbers-mode 1)
+
 (provide 'core/ui)
 ;;; ui.el ends here

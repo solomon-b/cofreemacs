@@ -23,19 +23,33 @@
 ;; files that need to match up with the version of Agda you've installed. This makes
 ;; `use-package' + `straight' not work very well, so we have to do this by hand.
 
-;; First, let's define a little helper function that will use the `agda-mode' binary to
-;; find the location of the elisp files.
-(defun agda-mode-locate ()
-  "Determine the location of the `agda2-mode' elisp files on your system."
-  (condition-case _ (with-temp-buffer (call-process "agda-mode" nil t nil "locate")
-                                    (buffer-string))
-      (error (error "Could not find the `agda-mode' binary in your path. Do you have agda installed?"))))
+(advice-add 'agda2-mode :before 'direnv-update-directory-environment)
 
-;; Now, let's load up `agda-mode'
-(load (agda-mode-locate))
+(use-package agda-input
+  :straight (agda-input :type git :host github :repo "agda/agda"
+			:branch "release-2.6.2"
+			:files ("src/data/emacs-mode/agda-input.el"))
+  :config
+  (agda-input-add-translations '(("hom" . "⇒")
+				 ("lam" . "λ")
+				 ("iso" . "≅")
+				 ("mono" . "↣")
+				 ("epi" . "↠")
+				 ("nat" . "ℕ")
+				 ("int" . "ℤ")
+				 ("alpha" . "α")
+				 ("beta" . "β")
+				 ("gamma" . "γ")
+				 ("monus" . "∸")
+				 ("z;" . "⨟"))))
 
-;; Once that file is loaded, we apply our configuration, which mostly consists of keybindings.
-(with-eval-after-load 'agda2-mode
+(use-package agda2-mode
+  :straight (agda2-mode :type git :host github
+			:repo "agda/agda"
+			:branch "release-2.6.2"
+			:files ("src/data/emacs-mode/*.el"
+				(:exclude "agda-input.el")))
+  :general
   (mode-leader-definer
     :keymaps 'agda2-mode-map
     "c" '(agda2-make-case :wk "case split")
@@ -51,21 +65,6 @@
   (global-motion-definer
     :keymaps 'agda2-mode-map
     "d" '(agda2-goto-definition-keyboard :wk "goto definition")))
-
-(with-eval-after-load 'agda-input
-  ;; Needed to silence the byte compiler.
-  (declare-function agda-input-add-translations "agda-input")
-  (agda-input-add-translations '(("hom" . "⇒")
-				 ("lam" . "λ")
-				 ("iso" . "≅")
-				 ("mono" . "↣")
-				 ("epi" . "↠")
-				 ("nat" . "ℕ")
-				 ("int" . "ℤ")
-				 ("alpha" . "α")
-				 ("beta" . "β")
-				 ("gamma" . "γ")
-				 ("monus" . "∸"))))
 
 (provide 'lang/agda)
 ;;; agda.el ends here

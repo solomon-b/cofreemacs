@@ -54,9 +54,9 @@ Don't mess with special buffers."
 (defun find-emacs-module ()
   "Open an Emacs configuration module."
   (interactive)
-  (let ((default-directory "~/.emacs.d/modules/"))
+  (let ((default-directory "~/Public/emacs/cofreemacs/modules/"))
     (call-interactively 'find-file)))
-
+ 
 (defun find-package-module ()
   "Open a third-party Emacs module."
   (interactive)
@@ -83,6 +83,28 @@ Don't mess with special buffers."
   "m" '(find-emacs-module :wk "find module")
   "s" '(find-package-module :wk "find package")
   "x" '(delete-file :wk "delete file"))
+
+(defun open-xmonad-config ()
+  (interactive)
+  (find-file "~/Development/nix/nixos-config/flakes/xmonad-solomon/xmonad.hs"))
+
+(defun open-xmobar-config ()
+  (interactive)
+  (find-file "~/Development/nix/nixos-config/flakes/xmobar-solomon/src/App.hs"))
+
+(defun open-nixos-config ()
+  (interactive)
+  (find-file "~/Development/nix/nixos-config/flake.nix"))
+
+(general-create-definer config-file-definer
+  :wrapping file-menu-definer
+  :prefix "SPC f c"
+  "" '(:ignore t :wk "config"))
+
+(config-file-definer
+  "c" '(open-nixos-config :wk "nixos config")
+  "X" '(open-xmobar-config :wk "xmobar")
+  "x" '(open-xmonad-config :wk "xmonad"))
 
 (global-definer
   "." '(find-file :wk "find file"))
@@ -129,9 +151,11 @@ Don't mess with special buffers."
   :general
   (help-menu-definer
     "d" '(toggle-debug-on-error :wk "toggle debugger")
+    "b" '(describe-bindings :wk "describe bindings")
     "f" '(helpful-callable :wk "describe function")
     "v" '(helpful-variable :wk "describe variable")
     "m" '(describe-mode :wk "describe mode")
+    "p" '(describe-package :wk "describe package")
     "F" '(describe-face :wk "describe face")
     "k" '(helpful-key :wk "describe key")
     "i" '(info :wk "open manual")

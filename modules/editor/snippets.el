@@ -11,7 +11,9 @@
   :straight t
   :diminish yas-minor-mode
   :custom (yas-indent-line 'fixed)
-  :config (yas-global-mode 1))
+  :config
+  (setq yas-snippet-dirs '("~/Public/emacs/cofreemacs/snippets"))
+  (yas-global-mode 1))
 
 (general-create-definer snippet-menu-definer
   :states '(normal motion)

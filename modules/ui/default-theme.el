@@ -14,21 +14,17 @@
 
 ;; I personally like the `modus-vivendi' theme, as
 ;; it provides a decent amount of contrast.
-(use-package modus-themes
+(use-package color-theme-sanityinc-tomorrow
   :straight t
   :config
-  (load-theme 'modus-vivendi t))
+  (load-theme 'sanityinc-tomorrow-eighties t))
 
 ;; I also like to have a bit of a margin around the frame.
-(set-frame-parameter (selected-frame) 'internal-border-width 48)
+(set-frame-parameter (selected-frame) 'internal-border-width 0)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Fonts
-
-(set-face-attribute 'default nil :family "Iosevka Fixed"  :height 140)
-;; Set up the fallback face for glyphs we don't know how to render.
-;; Let's use "Apple Color Emoji" for now, as most problematic glyphs are indeed emoji
-(set-fontset-font t nil (font-spec :size 14 :name "Apple Color Emoji"))
+(set-face-attribute 'default nil :height 130)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Mode Line

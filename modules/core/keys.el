@@ -53,6 +53,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Evil
 
+(use-package undo-fu
+  :straight t
+  :ensure t)
+
 ;; Let's load up `evil' for vim-keybindings
 (use-package evil
   :straight t
@@ -61,9 +65,7 @@
   ;; as they have `defcustom` setters attached
   (setq evil-want-keybinding nil)
   (setq evil-want-C-u-scroll t)
-  ;; Use the emacs-28 undo/redo system (if possible)
-  (unless (version< emacs-version "28")
-    (setq evil-undo-system 'undo-redo))
+  (setq evil-undo-system 'undo-fu)
   :config
   (evil-mode 1))
 
@@ -71,7 +73,7 @@
   :straight t)
 
 ;; `evil-nerd-commenter' let's us easily comment out lines with `g c c'.
-(use-package evil-nerd-commenter
+ (use-package evil-nerd-commenter
   :straight t
   :config
   :general
@@ -83,6 +85,16 @@
   :straight t
   :diminish which-key-mode
   :config (which-key-mode))
+
+(use-package evil-surround
+  :straight t
+  :config
+  (global-evil-surround-mode 1))
+
+(use-package smartparens
+  :straight t)
+
+(smartparens-global-mode 1)
 
 (provide 'core/keys)
 ;;; keys.el ends here

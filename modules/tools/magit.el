@@ -42,5 +42,12 @@
  "C-k" '(git-timemachine-show-next-revision :wk "next revision")
  "q"   '(git-timemachine-quit :wk "quit timemachine"))
 
+
+(use-package git-link
+  :straight t
+  :general
+  (global-motion-definer
+    "l" 'git-link))
+
 (provide 'tools/magit)
 ;;; magit.el ends here

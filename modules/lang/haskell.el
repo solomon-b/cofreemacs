@@ -9,6 +9,8 @@
 (require 'core/utils)
 (require 'editor/snippets)
 
+(advice-add 'haskell-mode :before 'direnv-update-directory-environment)
+
 (use-package haskell-mode
   :straight t
   :mode "\\.hs\\'"
@@ -16,8 +18,7 @@
   (add-to-path "~/.ghcup/bin/")
   (add-hook 'haskell-mode-hook 'interactive-haskell-mode)
   (add-hook 'haskell-mode-hook 'haskell-decl-scan-mode)
-  (when (featurep 'editor/lsp)
-    (add-hook 'haskell-mode-hook #'lsp))
+  (add-hook 'haskell-mode-hook 'lsp)
   :config
   (create-file-template ".*.hs$" "haskell-template" 'haskell-mode)
 
@@ -114,6 +115,22 @@
   (mode-leader-definer
     :keymaps 'haskell-mode-map
     "c" '(lsp-haskell-case-split :wk "case split")))
+
+(defun begone-th ()
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (while (re-search-forward (rx (group "$$(G.litName" (* space) "\"") (* (not "\"")) (group "\")")) nil t)
+      (replace-match "[G.name|" t nil nil 1)
+      (replace-match "|]" t nil nil 2))))
+
+(defun swap-qq ()
+  (interactive)
+  (save-excursion
+    (goto-char (point-min))
+    (while (re-search-forward (rx (group "[G.name|") (* (not "|")) (group "|]")) nil t)
+      (replace-match "G._" t nil nil 1)
+      (replace-match "" t nil nil 2))))
 
 (provide 'lang/haskell)
 ;;; haskell.el ends here
