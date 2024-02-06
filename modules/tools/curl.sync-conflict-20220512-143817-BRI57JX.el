@@ -8,8 +8,8 @@
 (use-package restclient
   :straight t)
 
-;; (use-package ob-restclient
-;;   :straight t)
+(use-package ob-restclient
+  :straight t)
 
 (provide 'tools/curl)
 ;;; curl.el ends here

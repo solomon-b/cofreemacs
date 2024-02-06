@@ -53,5 +53,12 @@
 (show-paren-mode 1)
 (global-display-line-numbers-mode 1)
 
+(setq show-trailing-whitespace t)
+
+;; Without this, Emacs will try to resize itself to a specific column size.
+(setq frame-inhibit-implied-resize t)
+
+(setq require-final-newline t)
+
 (provide 'core/ui)
 ;;; ui.el ends here

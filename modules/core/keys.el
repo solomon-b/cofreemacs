@@ -94,7 +94,7 @@
 (use-package smartparens
   :straight t)
 
-(smartparens-global-mode 1)
+;; (smartparens-global-mode 1)
 
 (provide 'core/keys)
 ;;; keys.el ends here

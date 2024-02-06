@@ -17,7 +17,7 @@
 (add-to-path "~/.local/bin/")
 (add-to-path "~/.cabal/bin")
 
-(create-file-template ".*.agda$" "agda-template" 'agda2-mode)
+;; (create-file-template ".*.agda$" "agda-template" 'agda2-mode)
 
 ;; Now for the tricky part. `agda-mode' is a bit odd, as Agda ships with a bundle of elisp
 ;; files that need to match up with the version of Agda you've installed. This makes
@@ -27,7 +27,7 @@
 
 (use-package agda-input
   :straight (agda-input :type git :host github :repo "agda/agda"
-			:branch "release-2.6.2"
+			:branch "release-2.6.3"
 			:files ("src/data/emacs-mode/agda-input.el"))
   :config
   (agda-input-add-translations '(("hom" . "⇒")
@@ -46,7 +46,7 @@
 (use-package agda2-mode
   :straight (agda2-mode :type git :host github
 			:repo "agda/agda"
-			:branch "release-2.6.2"
+			:branch "release-2.6.3"
 			:files ("src/data/emacs-mode/*.el"
 				(:exclude "agda-input.el")))
   :general

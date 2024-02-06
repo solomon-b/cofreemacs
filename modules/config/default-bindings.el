@@ -37,7 +37,8 @@ Don't mess with special buffers."
 (buffer-menu-definer
   "b" '(switch-to-buffer :wk "switch buffer")
   "d" '(kill-current-buffer :wk "kill buffer")
-  "D" '(kill-other-buffers :wk "kill other buffers"))
+  "D" '(kill-other-buffers :wk "kill other buffers")
+  "r" '(revert-buffer :wk "reload buffer"))
 
 (global-definer
   "," '(switch-to-buffer :wk "switch buffer")
@@ -81,20 +82,21 @@ Don't mess with special buffers."
   "r" '(recentf-find-file :wk "recent file")
   "i" '(open-init-file :wk "configuration file")
   "m" '(find-emacs-module :wk "find module")
-  "s" '(find-package-module :wk "find package")
+  "s" '(save-buffer :wk "save buffer")
+  "p" '(find-package-module :wk "find package")
   "x" '(delete-file :wk "delete file"))
 
 (defun open-xmonad-config ()
   (interactive)
-  (find-file "~/Development/nix/nixos-config/flakes/xmonad-solomon/xmonad.hs"))
+  (find-file "~/Development/Nix/nixos-config/flakes/xmonad-solomon/xmonad.hs"))
 
 (defun open-xmobar-config ()
   (interactive)
-  (find-file "~/Development/nix/nixos-config/flakes/xmobar-solomon/src/App.hs"))
+  (find-file "~/Development/Nix/nixos-config/flakes/xmobar-solomon/src/App.hs"))
 
 (defun open-nixos-config ()
   (interactive)
-  (find-file "~/Development/nix/nixos-config/flake.nix"))
+  (find-file "~/Development/Nix/nixos-config/flake.nix"))
 
 (general-create-definer config-file-definer
   :wrapping file-menu-definer
@@ -145,7 +147,7 @@ Don't mess with special buffers."
   ;; All of our elisp files are source controlled thanks to `straight',
   ;; so we need to set this to be able to easily navigate to them inside
   ;; of help buffers.
-  (setq vc-follow-symlinks t)
+
   :config
   (evil-collection-init 'helpful)
   :general
@@ -202,7 +204,8 @@ instead of `universal-argument'."
 
 (global-motion-definer
   "s" #'sort-lines
-  "=" #'align-regexp)
+  "=" #'align-regexp
+  "/" #'avy-goto-char-timer)
 
 (provide 'config/default-bindings)
 ;;; default-bindings.el ends here

@@ -28,7 +28,9 @@
   :general
   (mode-leader-definer
     :keymaps 'lsp-mode-map
-    "a" '(lsp-execute-code-action :wk "code action"))
+    "a" '(lsp-execute-code-action :wk "code action")
+    ;; "l" '(lsp-lens-mode :wk "lens-mode")
+    )
 
   (global-motion-definer
     :keymaps 'lsp-mode-map

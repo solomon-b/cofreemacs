@@ -24,7 +24,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Fonts
-(set-face-attribute 'default nil :height 130)
+(set-face-attribute 'default nil :height 100)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Mode Line
@@ -57,10 +57,6 @@ aligned respectively."
     " %b "
     mode-name
     " "
-    ;; Org
-    org-pomodoro-mode-line
-    ;; TODO I don't love the look of this... Perhaps we could insert it somewhere else?
-    " "
     display-time-string
     (:eval (s-replace "%" "%%%%" battery-mode-line-string)))
   "The left justified portion of the modeline.")
@@ -79,10 +75,14 @@ aligned respectively."
   "Custom evil indicator for the mode line.
 We need this to avoid weird padding issues.")
 
+(setcar mode-line-position
+        '(:eval (format "%3d%%" (/ (window-end) 0.01 (point-max)))))
+
+
 (defconst mode-line-right
   '(
     " "
-    mode-line-position
+    "٪" mode-line-position
     "<" mode-line-evil ">")
   "The right justified portion of the modeline.")
 

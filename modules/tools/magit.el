@@ -20,9 +20,15 @@
   :config
   (magit-todos-mode t))
 
-(use-package git-timemachine
-  :straight t
-  :commands git-timemachine)
+(straight-use-package
+ '(git-timemachine
+   :type git
+   :host nil
+   :repo "https://codeberg.org/pidu/git-timemachine"))
+
+;; (use-package git-timemachine
+;;   :straight t
+;;   :commands git-timemachine)
 
 (general-create-definer magit-menu-definer
   :wrapping global-definer

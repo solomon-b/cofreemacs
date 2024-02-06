@@ -19,6 +19,7 @@
   (load bootstrap-file nil 'nomessage))
 
 (require 'straight)
+(straight-use-package 'org)
 
 ;; Load up `use-package', so we can declaratively manage packages.
 (straight-use-package 'use-package)
@@ -39,6 +40,14 @@
 ;; even if we make a mistake in our config.
 (use-package restart-emacs
   :straight t)
+
+;; Consolidate backup files
+(make-directory "~/.emacs_backups/" t)
+(make-directory "~/.emacs_autosave/" t)
+(setq auto-save-file-name-transforms '((".*" "~/.emacs_autosave/" t)))
+(setq backup-directory-alist '(("." . "~/.emacs_backups/")))
+(setq backup-by-copying t)
+
 
 (provide 'core/bootstrap)
 ;;; bootstrap.el ends here
