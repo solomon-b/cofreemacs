@@ -6,7 +6,7 @@
 
 ;; Make sure that everything inside of our modules folder can actually
 ;; be loaded by Emacs.
-(add-to-list 'load-path "~/Public/emacs/cofreemacs/modules")
+(add-to-list 'load-path "~/.emacs.d/cofreemacs/modules")
 
 ;; Core:
 (require 'core/bootstrap)
